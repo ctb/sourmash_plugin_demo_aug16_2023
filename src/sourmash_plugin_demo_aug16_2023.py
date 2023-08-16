@@ -1,4 +1,4 @@
-"""xyz plugin description"""
+"""xyz plugin description HI BRY"""
 
 usage="""
    sourmash scripts xyz
@@ -24,54 +24,11 @@ from sourmash.save_load import (Base_SaveSignaturesToLocation,
 ###
 
 #
-# load_from plugin
-#
-
-def load_sketches(location, *args, **kwargs):
-    if location and location.endswith('.xyz'):
-        # ... add your code here ...
-        # return LinearIndex(siglist)
-        pass
-
-load_sketches.priority = 5
-
-
-#
-# save_to plugin - supports output to .xyz
-#
-
-class SaveSignatures_XYZ(Base_SaveSignaturesToLocation):
-    "Save signatures to a location."
-    def __init__(self, location):
-        super().__init__(location)
-        self.keep = []
-
-    @classmethod
-    def matches(self, location):
-        # match anything that is not None or ""
-        if location:
-            return location.endswith('.xyz')
-
-    def __repr__(self):
-        return f"SaveSignatures_XYZ('{self.location}')"
-
-    def open(self):
-        pass
-
-    def close(self):
-        # actually do the writing...
-        pass
-
-    def add(self, ss):
-        super().add(ss)
-        self.keep.append(ss)
-
-#
 # CLI plugin - supports 'sourmash scripts xyz'
 #
 
 class Command_XYZ(CommandLinePlugin):
-    command = 'xyz'             # 'scripts <command>'
+    command = 'yo-annie'             # 'scripts <command>'
     description = __doc__       # output with -h
     usage = usage               # output with no args/bad args as well as -h
     epilog = epilog             # output with -h
@@ -81,6 +38,9 @@ class Command_XYZ(CommandLinePlugin):
         super().__init__(subparser)
         # add argparse arguments here.
         debug_literal('RUNNING cmd_xyz.__init__')
+        subparser.add_argument('colton', help='colton wuz here')
+        subparser.add_argument('-H', '--hazel', required=True)
+        subparser.add_argument('--no-save', action='store_true', help='discard all results without doing anything')
 
     def main(self, args):
         # code that we actually run.
